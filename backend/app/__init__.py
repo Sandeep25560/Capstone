@@ -38,18 +38,11 @@ def create_app():
     # ✅ CORS for Vite dev server
     cors.init_app(
         app,
-        resources={
-            r"/api/*": {
-                "origins": [
-                    "http://127.0.0.1:5173",
-                    "http://localhost:5173",
-                ],
-                "methods": ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
-                "allow_headers": ["Content-Type", "Authorization"],
-                "supports_credentials": True,
-            }
-        },
+        resources={r"/api/*": {"origins": "*"}},
+        methods=["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
+        allow_headers=["Content-Type", "Authorization"],
     )
+
 
     register_blueprints(app)
     register_error_handlers(app)
